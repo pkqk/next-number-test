@@ -5,6 +5,7 @@ def next_natural(num):
     digits = num_to_digits(num)
     n_sum = sum(digits)
     possible = find_sums(len(digits), n_sum)
+    print possible
     possible_nums = [digits_to_num(digits) for digits in possible]
     greater_nums = filter(lambda x: x > num, possible_nums)
     if any(greater_nums):
@@ -20,10 +21,13 @@ def filter_num(num):
 
 def find_sums(digit_count, n_sum):
     if digit_count == 1:
-        return [[n_sum]]
+        if n_sum < 10:
+            return [[n_sum]]
+        else:
+            return []
     else:
         sums = []
-        for i in range(1, n_sum):
+        for i in range(1, min(n_sum, 10)):
             new_sum = n_sum - i
             if new_sum > 0:
                 for new_digits in find_sums(digit_count - 1, new_sum):
