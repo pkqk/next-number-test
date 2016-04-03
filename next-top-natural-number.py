@@ -1,9 +1,19 @@
+"""
+Novastone coding test
+
+Author: Adam Sven Johnson <adam@pkqk.net>
+
+
+next_number() Finds the next number in which the digits sum to the same number
+"""
+
+
 import doctest
 import sys
 import unittest
 
 
-def next_natural(num):
+def next_number(num):
     """
     Find the next greatest number where the sum of the digits is the same
     """
@@ -56,19 +66,19 @@ def digits_to_num(digits):
 class TestNumberFinder(unittest.TestCase):
 
     def test_123(self):
-        self.assertEqual(132, next_natural('123'))
+        self.assertEqual(132, next_number('123'))
 
     def test_0200(self):
-        self.assertEqual(1001, next_natural('0200'))
+        self.assertEqual(1001, next_number('0200'))
 
     def test_09999999999999(self):
-        self.assertEqual(18999999999999, next_natural('09999999999999'))
+        self.assertEqual(18999999999999, next_number('09999999999999'))
 
     def test_90(self):
-        self.assertEqual(-1, next_natural('99'))
+        self.assertEqual(-1, next_number('99'))
 
     def test_9999(self):
-        self.assertEqual(-1, next_natural('9999'))
+        self.assertEqual(-1, next_number('9999'))
 
 
 def load_tests(loader, tests, ignore):
@@ -78,6 +88,6 @@ def load_tests(loader, tests, ignore):
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
-        print next_natural(sys.argv[1])
+        print next_number(sys.argv[1])
     else:
         unittest.main()
