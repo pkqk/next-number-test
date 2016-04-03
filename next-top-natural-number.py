@@ -22,9 +22,11 @@ def find_sums(digit_count, n_sum):
         if n_sum < 10:
             yield [n_sum]
     else:
-        for i in range(0, min(n_sum, 10)):
-            new_sum = n_sum - i
-            if new_sum > 0:
+        if digit_count * 9 >= n_sum:
+            for i in range(0, min(n_sum, 10)):
+                new_sum = n_sum - i
+                if new_sum <= 0:
+                    continue
                 for new_digits in find_sums(digit_count - 1, new_sum):
                     yield [i] + new_digits
 
@@ -59,8 +61,8 @@ class TestNumberFinder(unittest.TestCase):
     def test_0200(self):
         self.assertEqual(1001, next_natural('0200'))
 
-    #def test_09999999999999(self):
-    #    self.assertEqual(18999999999999, next_natural('09999999999999'))
+    def test_09999999999999(self):
+        self.assertEqual(18999999999999, next_natural('09999999999999'))
 
     def test_90(self):
         self.assertEqual(-1, next_natural('99'))
